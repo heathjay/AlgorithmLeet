@@ -20,30 +20,58 @@ type ReturnTupe struct {
 	MaxBSTSize int
 	Max        float64
 	Min        float64
+	//Data       float64
 }
 
 func GetBi(node *Node) ReturnTupe {
 	if node == nil {
-		return ReturnTupe{&Node{}, 0, math.Inf(1), math.Inf(-1)}
+		return ReturnTupe{nil, 0, math.Inf(1), math.Inf(-1)}
 	}
 
 	LTree := GetBi(node.left)
 	RTree := GetBi(node.right)
-
 	min := math.Min(node.data, math.Min(LTree.Min, RTree.Min))
 	max := math.Max(node.data, math.Max(LTree.Max, RTree.Max))
 	maxBSTSize := int(math.Max(float64(LTree.MaxBSTSize), float64(RTree.MaxBSTSize)))
+	if LTree.HeadNode == nil && RTree.HeadNode != nil {
+		if node.data < RTree.Min {
+			return ReturnTupe{node, RTree.MaxBSTSize + 1, RTree.Max, node.data}
+		} else {
+			return ReturnTupe{RTree.HeadNode, RTree.MaxBSTSize, RTree.Max, RTree.Min}
+		}
+	} else if LTree.HeadNode != nil && RTree.HeadNode == nil {
+		if node.data > LTree.Max {
+			return ReturnTupe{node, LTree.MaxBSTSize + 1, node.data, LTree.Min}
+		} else {
+			return ReturnTupe{LTree.HeadNode, LTree.MaxBSTSize, LTree.Max, LTree.Min}
+		}
+
+	} else if LTree.HeadNode == nil && RTree.HeadNode == nil {
+		return ReturnTupe{node, 1, node.data, node.data}
+	}
+
+	// if RTree.HeadNode == nil {
+	// 	// 	RTree.Data = math.Inf(-1)
+	// 	// } else {
+	// 	// 	RTree.Data = RTree.HeadNode.data
+	// 	return ReturnTupe{nil, 0, math.Inf(1), math.Inf(-1), 0}
+	// }
+
 	var headNode *Node
+	// var tData float64
 	headNode = new(Node)
 	if LTree.HeadNode.data >= RTree.HeadNode.data {
 		headNode = LTree.HeadNode
+
 	} else {
 		headNode = RTree.HeadNode
+		// tData = RTree.Data
 	}
 
 	if LTree.HeadNode == node.left && RTree.HeadNode == node.right && node.data > LTree.Max && node.data < RTree.Min {
 		maxBSTSize = LTree.MaxBSTSize + RTree.MaxBSTSize + 1
 		headNode = node
+		// tData = node.data
 	}
 	return ReturnTupe{headNode, maxBSTSize, min, max}
 }
@@ -71,7 +99,7 @@ func main() {
 	nodeA := Node{&nodeB, &nodeC, 6}
 	res := GetBi(&nodeA)
 	if res.HeadNode != nil {
-		fmt.Println("size:", res.MaxBSTSize, "+head:", res.HeadNode.data)
+		fmt.Println("size:", res.MaxBSTSize)
 	} else {
 		fmt.Println("size:", res.MaxBSTSize, "+head:err")
 	}
