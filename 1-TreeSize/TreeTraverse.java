@@ -21,7 +21,7 @@ if( X==null){
   int min=Math.min(X.value,Math.min(lData.min,rData.min));//得到X的最小值
   int max=Math.min(X.value,Math.max(lData.max,rData.max));//得到X的最大值 
   int maxBSTSize=Math.max(lData.maxBSTSize,rData.maxBSTSize);//如果只考虑左右子树的最大搜索二叉树，不考虑把他们和当前节点合起来当成一个二叉树时的最大搜索二叉树值
-  Node maxBSTHead=lData.maxBSTHead>=rData.maxBSTHead?lData.maxBSTHead:rData.maxBSTHead;//同理
+  Node maxBSTHead=lData.maxBSTSize>=rData.maxBSTSize?lData.maxBSTHead:rData.maxBSTHead;//同理
   if(lData.maxBSTHead==X.left&&rData.maxBSTHead==X.right&&X.value>lData.max&&X.value<rData.min){//如果当前结点也可以加入到搜索二叉树中
     maxBSTSize=lData.maxBSTSize+rData.maxBSTSize+1;
     maxBSTHead=X;
