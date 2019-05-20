@@ -51,6 +51,7 @@ func Move(arr *[3][4]int, AR, AC, BR, BC int, flag bool) {
 }
 func main() {
 	arr := [3][4]int{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}}
+	//1,2,5,9,6,3,4,7,10,11,8,12
 	Print(&arr)
 
 }
