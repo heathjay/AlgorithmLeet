@@ -7,19 +7,27 @@ import (
 func twoSum(nums *[]int, target int) []int {
 	m := make(map[int]int, len(*nums))
 	//res := make([]int, 2)
+	// for i, v := range *nums {
+	// 	m[v] = i
+	// }
+	// for i, v := range *nums {
+	// 	tmp := target - v
+	// 	v1, ok := m[tmp]
+	// 	if ok && v1 != i {
+	// 		// res[0] = i
+	// 		// res[1] = v1
+	// 		return []int{i, v1}
+	// 	}
+	// }
+	//return res
+
 	for i, v := range *nums {
-		m[v] = i
-	}
-	for i, v := range *nums {
-		tmp := target - v
-		v1, ok := m[tmp]
-		if ok && v1 != i {
-			// res[0] = i
-			// res[1] = v1
+		v1, ok := m[target-v]
+		if len(m) != 0 && ok {
 			return []int{i, v1}
 		}
+		m[target-v] = i
 	}
-	//return res
 	return []int{-1}
 }
 func main() {

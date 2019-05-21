@@ -14,8 +14,8 @@ public class leetcode1 {
         return null;
     }
     public static void main(String[] args) {
-    	int[] nums= {2,7,11,5};
-		int[] shuzu=twoSum(nums,9);
+    	int[] nums= {3,7,2,4};
+		int[] shuzu=twoSum(nums,6);
 		for(int i=0;i<shuzu.length;i++) {
 			System.out.print(shuzu[i]+",");
 		}
