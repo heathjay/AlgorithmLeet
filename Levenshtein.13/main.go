@@ -63,8 +63,10 @@ func main() {
 	var str string
 	var targe string
 
-	fmt.Scanln(&str)
-	fmt.Scanln(&targe)
+	str = "doggjob"
+	targe = "goodjob"
+	// fmt.Scanln(&str)
+	// fmt.Scanln(&targe)
 
 	res := Lev_dist(str, targe)
 	fmt.Println(res)
