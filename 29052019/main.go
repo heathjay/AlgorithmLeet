@@ -25,6 +25,8 @@ func myAtoi(str string) int {
 		if i == 0 && str[i] == '-' {
 			flag = false
 			continue
+		} else if i == 0 && str[i] == '+' {
+			continue
 		}
 		if str[i] < byte('0') || str[i] > byte('9') {
 			break
@@ -46,6 +48,6 @@ func myAtoi(str string) int {
 	return res
 }
 func main() {
-	str := "42"
+	str := "+1"
 	fmt.Println(myAtoi(str))
 }
