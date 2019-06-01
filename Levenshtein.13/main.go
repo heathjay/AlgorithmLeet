@@ -32,7 +32,7 @@ func Lev_dist(str string, targe string) int {
 
 	fmt.Println("(******************)")
 	//算法
-
+	fmt.Println(width)
 	for i := 1; i < height; i++ {
 		for j := 1; j < width; j++ {
 			dif := 1
@@ -41,12 +41,12 @@ func Lev_dist(str string, targe string) int {
 			}
 			mtr[i][j] = Min(Min(mtr[i-1][j]+1, mtr[i][j-1]+1), mtr[i-1][j-1]+dif)
 		}
-
+		fmt.Println(mtr[i])
 	}
 
-	for _, v := range mtr {
-		fmt.Println(v)
-	}
+	// for _, v := range mtr {
+	// 	fmt.Println(v)
+	// }
 	return mtr[len(str)][len(targe)]
 
 }
@@ -63,10 +63,10 @@ func main() {
 	var str string
 	var targe string
 
-	str = "doggjob"
-	targe = "goodjob"
-	// fmt.Scanln(&str)
-	// fmt.Scanln(&targe)
+	// str = "doggjob"
+	// targe = "goodjobiiiii"
+	fmt.Scanln(&str)
+	fmt.Scanln(&targe)
 
 	res := Lev_dist(str, targe)
 	fmt.Println(res)
