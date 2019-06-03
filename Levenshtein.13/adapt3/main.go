@@ -42,7 +42,6 @@ func Min(a, b int) int {
 }
 
 func MoveGo(cpus int, AR int, AC int, BR int, BC int, dp *[][]int, xB int, yB int, exit chan bool, s1 *string, s2 *string, xFlag bool, yFlag bool, xT int, yT int, Final chan bool) {
-	c := 1
 
 	for {
 		tX := xT
@@ -62,11 +61,7 @@ func MoveGo(cpus int, AR int, AC int, BR int, BC int, dp *[][]int, xB int, yB in
 				tY = len(*s2) - cpus*yT
 			}
 		}
-
 		go work(dp, AR, AC, tX, tY, s1, s2, exit, Final)
-		//	fmt.Println("xB=", xB, "yB=", yB, "xT=", xT, "yT=", yT, "tX=", tX, "tY=", tY)
-		//	fmt.Println("AR=", AR, "AC=", AC, "BR=", BR, "BC=", BC, "i=", c)
-		c++
 		if AR == BR && AC == BC {
 			break
 		}
@@ -89,7 +84,6 @@ func Distribut(s1, s2 string) int {
 		return len(s2)
 	}
 
-	//fmt.Println(cpus)
 	dp := make([][]int, n)
 	for i := 0; i < n; i++ {
 		dp[i] = make([]int, m)
@@ -208,23 +202,13 @@ func Distribut(s1, s2 string) int {
 				break
 			}
 		}
-		//exitMChan <- true
-		//fmt.Println("AC=", AC, " BC=", BC, " Count=", count)
-		//time.Sleep(3 * time.Second)
-		//		fmt.Println("close count:", count)
 		close(exitChan)
 	}
-	// res := make([]bool, cap)
+
 	for i := 0; i < hC*wC; i++ {
 		<-Final
 	}
 	close(Final)
-	//fmt.Println(len(res))
-	//time.Sleep(10 * time.Second)
-	// for _, v := range dp {
-	// 	fmt.Println(v)
-
-	// }
 	return dp[len(s2)][len(s1)]
 }
 func main() {
